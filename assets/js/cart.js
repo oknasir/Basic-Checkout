@@ -31,7 +31,7 @@ jQuery(document).ready(function ($) {
   });
 
 
-  $('#cart-items').on('click', 'a', function () {
+  $('#cart-items').on('click', 'a[data-index]', function () {
     var $e = $(this);
     let items = localStorage.getItem('cartItems');
     if (items) {
@@ -47,6 +47,9 @@ jQuery(document).ready(function ($) {
 
       cartRender();
     }
+  }).on('click', 'a[data-checkout]', function () {
+    localStorage.removeItem('cartItems');
+    $('#cart-form').submit();
   });
 
   cartRender();
@@ -57,9 +60,17 @@ jQuery(document).ready(function ($) {
       items = JSON.parse(items);
     }
     let html = '';
+    let cartInputs = '';
     $.each(items, function (key, prod) {
       html += `<a class="dropdown-item" data-index="${key}" href="javascript:">${prod.title} <span class="badge badge-danger">${prod.quantity}</span></a>`;
+      cartInputs += `<input type="hidden" name="product[${key}][id]" value="${prod.id}"><input type="hidden" name="product[${key}][quantity]" value="${prod.quantity}">`;
     });
+
+    if (items.length) {
+      html += `<a class="dropdown-item text-light text-center bg-danger" data-checkout href="javascript:">Checkout</a>`;
+    }
+
     $('#cart-items').html(html);
+    $('#cart-values').html(cartInputs);
   }
 });

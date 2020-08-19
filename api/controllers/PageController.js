@@ -15,6 +15,17 @@ module.exports = {
 
     return res.view('pages/homepage', {title: 'Products List', products});
 
+  },
+
+
+  orders: async (req, res) => {
+
+    let orders = await Order.find({}).populate('product');
+
+    console.log(orders);
+
+    return res.view('pages/orders', {title: 'Orders List', orders});
+
   }
 
 

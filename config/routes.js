@@ -12,6 +12,11 @@ module.exports.routes = {
 
 
   'GET /': { controller: 'PageController', action: 'home' },
+  'GET /orders': { controller: 'PageController', action: 'orders' },
+
+  'POST /cart': { controller: 'CartController', action: 'submit' },
+  'GET /checkout': { controller: 'CartController', action: 'checkout' },
+  'POST /checkout/submit': { controller: 'CartController', action: 'submitOrder' },
 
 
 

@@ -15,14 +15,23 @@
     "@sailshq/lodash": "^3.10.3"
   },
   "devDependencies": {
-    "eslint": "5.16.0"
+    "@babel/preset-react": "^7.8.3",
+    "cross-env": "^7.0.2",
+    "eslint": "^6.8.0",
+    "laravel-mix": "^5.0.1",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
   },
   "scripts": {
     "sails": "node app.js",
     "start": "NODE_ENV=production node app.js",
     "test": "npm run lint && npm run custom-tests && echo 'Done.'",
     "lint": "./node_modules/eslint/bin/eslint.js . --max-warnings=0 --report-unused-disable-directives && echo '✔  Your .js files look good.'",
-    "custom-tests": "echo \"(No other custom tests yet.)\" && echo"
+    "custom-tests": "echo \"(No other custom tests yet.)\" && echo",
+    "dev": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "prod": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "npm run dev -- --watch",
+    "watch-poll": "npm run watch -- --watch-poll"
   },
   "main": "app.js",
   "repository": {
